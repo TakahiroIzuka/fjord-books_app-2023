@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    attributes:
+      book:
+        title: "Title"
+        memo: "Memo"
+        author: "Author"
+        picture: "Picture"
   book: "book"
   book_init: "Book"
   title: "Title"
