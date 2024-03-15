@@ -1,9 +1,9 @@
-<h1><%= t :New_book %></h1>
+<h1><%= t :new_product, product: @product %></h1>
 
-<%= render "form", book: @book, submit_word: t(:Create) %>
+<%= render "form", book: @book, submit_word: t(:create) %>
 
 <br>
 
 <nav class="page-nav">
-  <%= link_to t(:Back_to_books), books_path %>
+  <%= link_to t(:back_to_products, product: @product), books_path %>
 </nav>

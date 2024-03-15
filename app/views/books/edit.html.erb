@@ -1,10 +1,10 @@
-<h1><%= t :Editing_book %></h1>
+<h1><%= t :edit_product, product: @product %></h1>
 
-<%= render "form", book: @book, submit_word: t(:Update) %>
+<%= render "form", book: @book, submit_word: t(:update) %>
 
 <br>
 
 <nav class="page-nav">
-  <%= link_to t(:Show_this_book), @book %> |
-  <%= link_to t(:Back_to_books), books_path %>
+  <%= link_to t(:show_this_product, product: @product), @book %> |
+  <%= link_to t(:back_to_products, product: @product), books_path %>
 </nav>
