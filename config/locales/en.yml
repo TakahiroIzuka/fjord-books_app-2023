@@ -1,11 +1,17 @@
 en:
   book: "book"
   book_init: "Book"
-  books: "Books"
   title: "Title"
   memo: "Memo"
   author: "Author"
   picture: "Picture"
+  books:
+    index:
+      title: "Books"
+    new:
+      title: "New Book"
+    edit:
+      title: "Edit Book"
   show_this_product: "Show this %{product}"
   new_product: "New %{product}"
   edit_this_product: "Edit this %{product}"

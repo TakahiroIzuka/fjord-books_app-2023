@@ -1,17 +1,22 @@
 ja:
   book: "本"
   book_init: "本"
-  books: "書籍"
   title: "タイトル"
   memo: "メモ"
   author: "著者"
   picture: "画像"
-  show_this_product: "この%{product}を表示"
-  new_product: "新しい%{product}を追加"
-  edit_this_product: "この%{product}を編集"
+  books:
+    index:
+      title: "書籍"
+    new:
+      title: "新しい本を追加"
+    edit:
+      title: "本の編集"
+  show_this_product: "この%{product}を表示する"
+  new_product: "新しい%{product}を追加する"
+  edit_this_product: "この%{product}を編集する"
   back_to_products: "%{product}の一覧に戻る"
-  destroy_this_product: "この%{product}を削除"
-  edit_product: "%{product}の編集"
+  destroy_this_product: "この%{product}を削除する"
   create: "追加する"
   update: "更新する"
   product_was_successfully_created: "新しい%{product}が追加されました"
