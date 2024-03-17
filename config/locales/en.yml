@@ -4,6 +4,7 @@ en:
       book: "book"
     attributes:
       book:
+        capitalized_model: "Book"
         title: "Title"
         memo: "Memo"
         author: "Author"
