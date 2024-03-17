@@ -3,12 +3,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy]
 
-  def initialize
-    super
-    @product = t :book
-    @product_init = t :book_init
-  end
-
   # GET /books or /books.json
   def index
     @books = Book.all
@@ -31,7 +25,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: t(:product_was_successfully_created, product: @product_init) }
+        format.html { redirect_to book_url(@book), notice: t(:product_was_successfully_created, model: Book.model_name.human) }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +38,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: t(:product_was_successfully_updated, product: @product_init) }
+        format.html { redirect_to book_url(@book), notice: t(:product_was_successfully_updated, model: Book.model_name.human) }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +52,7 @@ class BooksController < ApplicationController
     @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_url, notice: t(:product_was_successfully_destroyed, product: @product_init) }
+      format.html { redirect_to books_url, notice: t(:product_was_successfully_destroyed, model: Book.model_name.human) }
       format.json { head :no_content }
     end
   end

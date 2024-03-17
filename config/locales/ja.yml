@@ -1,17 +1,13 @@
 ja:
   activerecord:
+    models:
+      book: "本"
     attributes:
       book:
         title: "タイトル"
         memo: "メモ"
         author: "著者"
         picture: "画像"
-  book: "本"
-  book_init: "本"
-  title: "タイトル"
-  memo: "メモ"
-  author: "著者"
-  picture: "画像"
   books:
     index:
       title: "書籍"
@@ -19,13 +15,13 @@ ja:
       title: "新しい本を追加"
     edit:
       title: "本の編集"
-  show_this_product: "この%{product}を表示する"
-  new_product: "新しい%{product}を追加する"
-  edit_this_product: "この%{product}を編集する"
-  back_to_products: "%{product}の一覧に戻る"
-  destroy_this_product: "この%{product}を削除する"
+  show_this_model: "この%{model}を表示する"
+  new_model: "新しい%{model}を追加する"
+  edit_this_model: "この%{model}を編集する"
+  back_to_models: "%{model}の一覧に戻る"
+  destroy_this_model: "この%{model}を削除する"
   create: "追加する"
   update: "更新する"
-  product_was_successfully_created: "新しい%{product}が追加されました"
-  product_was_successfully_updated: "%{product}が更新されました"
-  product_was_successfully_destroyed: "%{product}が削除されました"
+  product_was_successfully_created: "新しい%{model}が追加されました"
+  product_was_successfully_updated: "%{model}が更新されました"
+  product_was_successfully_destroyed: "%{model}が削除されました"

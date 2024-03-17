@@ -1,17 +1,13 @@
 en:
   activerecord:
+    models:
+      book: "book"
     attributes:
       book:
         title: "Title"
         memo: "Memo"
         author: "Author"
         picture: "Picture"
-  book: "book"
-  book_init: "Book"
-  title: "Title"
-  memo: "Memo"
-  author: "Author"
-  picture: "Picture"
   books:
     index:
       title: "Books"
@@ -19,14 +15,14 @@ en:
       title: "New Book"
     edit:
       title: "Edit Book"
-  show_this_product: "Show this %{product}"
-  new_product: "New %{product}"
-  edit_this_product: "Edit this %{product}"
-  back_to_products: "Back to %{product}s"
-  destroy_this_product: "Destroy this %{product}"
-  edit_product: "Edit %{product}"
+  show_this_model: "Show this %{model}"
+  new_model: "New %{model}"
+  edit_this_model: "Edit this %{model}"
+  back_to_models: "Back to %{model}s"
+  destroy_this_model: "Destroy this %{model}"
+  edit_model: "Edit %{model}"
   create: "Create"
   update: "Update"
-  product_was_successfully_created: "%{product} was successfully created"
-  product_was_successfully_updated: "%{product} was successfully updated"
-  product_was_successfully_destroyed: "%{product} was successfully destroyed"
+  product_was_successfully_created: "%{model} was successfully created"
+  product_was_successfully_updated: "%{model} was successfully updated"
+  product_was_successfully_destroyed: "%{model} was successfully destroyed"
