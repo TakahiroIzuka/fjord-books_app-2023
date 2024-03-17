@@ -11,7 +11,7 @@
   </head>
 
   <body class="<%= params[:action] %>">
-    <header>
+    <header class="<%= "valid-header" if user_signed_in? %>">
       <% if user_signed_in? %>
         <% unless current_page?('/books') %>
           <%= link_to t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)), books_path %>
