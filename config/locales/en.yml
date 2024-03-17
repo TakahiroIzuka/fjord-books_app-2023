@@ -4,7 +4,6 @@ en:
       book: "book"
     attributes:
       book:
-        capitalized_model: "Book"
         title: "Title"
         memo: "Memo"
         author: "Author"
@@ -24,6 +23,6 @@ en:
   edit_model: "Edit %{model}"
   create: "Create"
   update: "Update"
-  successfully_created: "%{model} was successfully created"
-  successfully_updated: "%{model} was successfully updated"
-  successfully_destroyed: "%{model} was successfully destroyed"
+  successfully_created: "%{model} was successfully created."
+  successfully_updated: "%{model} was successfully updated."
+  successfully_destroyed: "%{model} was successfully destroyed."

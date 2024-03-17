@@ -4,7 +4,6 @@ ja:
       book: "本"
     attributes:
       book:
-        capitalized_model: "本"
         title: "タイトル"
         memo: "メモ"
         author: "著者"
