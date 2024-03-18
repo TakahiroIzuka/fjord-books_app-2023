@@ -11,6 +11,7 @@ ja:
         title: タイトル
 
       user:
+        email: メールアドレス
         address: 住所
         post_code: 郵便番号
         introduction: 自己紹介

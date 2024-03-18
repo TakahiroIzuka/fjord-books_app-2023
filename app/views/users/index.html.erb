@@ -2,6 +2,6 @@
 
 <% @users.each do |user| %>
   <div class="index-item">
-    <%= user.email %>
+    <%= link_to user.email, user %>
   </div>
 <% end %>
