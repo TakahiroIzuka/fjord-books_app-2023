@@ -11,6 +11,18 @@
   </head>
 
   <body class="<%= params[:action] %>">
+    <header class="<%= "valid-header" if user_signed_in? %>">
+      <% if user_signed_in? %>
+        <% unless current_page?('/books') %>
+          <%= link_to t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)), books_path %>
+        <% end %>
+        <% unless current_page?('/users') %>
+          <%= link_to t('views.common.title_index', name: i18n_pluralize(User.model_name.human)), user_registration_path %>
+        <% end %>
+        <%= link_to 'アカウント編集', edit_registration_path(current_user) %>
+        <%= link_to t('views.common.log_out'), destroy_user_session_path, method: :delete %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
