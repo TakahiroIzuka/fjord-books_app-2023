@@ -1,21 +1,21 @@
 <div id="<%= dom_id user %>">
   <p>
-    <strong><%= :email %></strong>
+    <strong><%= t User.human_attribute_name(:email) %>:</strong>
     <%= user.email %>
   </p>
 
   <p>
-    <strong><%= :address %></strong>
+    <strong><%= t User.human_attribute_name(:address) %>:</strong>
     <%= user.address %>
   </p>
 
   <p>
-    <strong><%= :post_code %></strong>
+    <strong><%= t User.human_attribute_name(:post_code) %>:</strong>
     <%= user.post_code %>
   </p>
 
   <p>
-    <strong><%= :introduction %></strong>
+    <strong><%= t User.human_attribute_name(:introduction) %>:</strong>
     <%= user.introduction %>
   </p>
 </div>
