@@ -27,7 +27,7 @@
 
   <p>
     <strong><%= :avatar %>:</strong>
-    <%= image_tag user.avatar if user.avatar.attached? %>
+    <%= image_tag user.avatar.variant(resize_to_limit: [150, 150]) if user.avatar.attached? %>
   </p>
 
 </div>
