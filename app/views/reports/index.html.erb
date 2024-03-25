@@ -1,0 +1,14 @@
+<h1><%= :reports %></h1>
+
+<div id="reports" class="index-items">
+  <% @reports.each do |report| %>
+    <div class="index-item">
+      <%= render report %>
+      <p>
+        <%= link_to :report, report %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<%#= paginate @reports %>
