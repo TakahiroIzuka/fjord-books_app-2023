@@ -1,12 +1,12 @@
 <div id="<%= dom_id report %>">
 
   <p>
-    <strong><%= :title %>:</strong>
+    <strong><%= Report.human_attribute_name(:title) %>:</strong>
     <%= report.title %>
   </p>
 
   <p>
-    <strong><%= :description %>:</strong>
+    <strong><%= Report.human_attribute_name(:description) %>:</strong>
     <%= report.description %>
   </p>
 

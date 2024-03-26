@@ -216,3 +216,6 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  report:
+    new:
+      title: "日報作成"
