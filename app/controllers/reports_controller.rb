@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[show]
+  before_action :set_report, only: %i[show destroy]
 
   def index
     @reports = Report.order(:id).page(params[:page]).per(3)
@@ -20,6 +20,15 @@ class ReportsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @report.destroy
+
+    respond_to do |format|
+      format.html { redirect_to reports_url notice: :report_is_deleted }
+      format.json { head :no_content }
     end
   end
 
