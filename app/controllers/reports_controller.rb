@@ -11,8 +11,17 @@ class ReportsController < ApplicationController
 
   def show; end
 
+  def edit
+    @report = Report.find(params[:id])
+
+    if @report.author.id != current_user.id
+      flash[:alert] = t('controllers.common.alert_edit_authorization_error', name: Report.model_name.human)
+      redirect_to report_path(@report)
+    end
+  end
+
   def create
-    @report = Report.new(report_params)
+    @report = Report.new(report_params.merge({ user_id: current_user.id }))
 
     respond_to do |format|
       if @report.save
@@ -36,13 +45,18 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    @report.destroy
+    if @report.author.id != current_user.id
+      flash[:alert] = t('controllers.common.alert_destroy_authorization_error', name: Report.model_name.human)
+      redirect_to report_path(@report)
+    else
+      @report.destroy
 
-    respond_to do |format|
-      format.html { redirect_to reports_url notice: :report_is_deleted }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to reports_url notice: :report_is_deleted }
+        format.json { head :no_content }
+      end
     end
-  end
+ end
 
   private
 
