@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  before_action :set_report, only: %i[show]
 
   def index
     @reports = Report.order(:id).page(params[:page]).per(3)
@@ -7,6 +8,8 @@ class ReportsController < ApplicationController
   def new
     @report = Report.new
   end
+
+  def show; end
 
   def create
     @report = Report.new(report_params)
@@ -21,6 +24,10 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def set_report
+    @report = Report.find(params[:id])
+  end
 
   def report_params
     params.require(:report).permit(:title, :description)
