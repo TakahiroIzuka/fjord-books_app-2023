@@ -1,0 +1,14 @@
+<div id="<%= dom_id comment %>">
+  <p>
+    <strong><%= Comment.human_attribute_name(:content) %>:</strong>
+    <span><%= comment.content %></span>
+  </p>
+  <p>
+    <strong><%= Comment.human_attribute_name(:user) %>:</strong>
+    <span><%= comment.user.display_name %></span>
+  </p>
+  <p>
+    <strong><%= Comment.human_attribute_name(:created_at) %>:</strong>
+    <span><%= comment.get_posted_date %></span>
+  </p>
+</div>

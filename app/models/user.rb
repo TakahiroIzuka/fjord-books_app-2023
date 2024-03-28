@@ -9,4 +9,9 @@ class User < ApplicationRecord
   end
 
   has_one :report, dependent: :destroy
+  has_many :comment, dependent: :destroy
+
+  def display_name
+    self.name != '' ? self.name : self.email
+  end
 end
