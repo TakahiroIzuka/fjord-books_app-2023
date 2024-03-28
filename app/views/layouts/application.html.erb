@@ -11,6 +11,14 @@
   </head>
 
   <body class="<%= params[:action] %>">
+    <header>
+      <% if user_signed_in? %>
+        <%= link_to t('views.common.title_index', name: Book.model_name.human), books_path, method: :get %>
+        <%= link_to t('views.common.title_index', name: User.model_name.human), users_path, method: :get %>
+        <%= link_to t('views.common.title_edit', name: 'アカウント'), edit_registration_path(current_user), method: :get %>
+        <%= link_to t('views.common.sign_out'), destroy_user_session_path, method: :delete %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

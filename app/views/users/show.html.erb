@@ -1,0 +1,9 @@
+<h1><%= t 'views.common.title_detail', name: User.model_name.human %></h1>
+
+<div>
+  <%= render @user %>
+</div>
+
+<div>
+  <%= link_to t('views.common.back', name: User.model_name.human.downcase), users_path %>
+</div>
