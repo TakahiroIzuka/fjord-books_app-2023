@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Books::CommentsController < CommentsController
-  before_action :set_commentable, only: %i[new create destroy]
-
   def create
     @comment = @commentable.comments.new(comment_params)
     if @comment.save
@@ -14,9 +12,7 @@ class Books::CommentsController < CommentsController
 
   def destroy
     @comment = @commentable.comments.find(params[:id])
-    if @comment.user_id != current_user.id
-      redirect_to book_path(@commentable), alert: '他のユーザーのコメントは削除できません'
-    end
+    redirect_to book_path(@commentable), alert: '他のユーザーのコメントは削除できません' if @comment.user_id != current_user.id
 
     @comment.destroy
     redirect_to book_path(@commentable), notice: 'コメントを削除しました'

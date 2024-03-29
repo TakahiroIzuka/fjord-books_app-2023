@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
@@ -14,10 +16,10 @@ class ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
 
-    if @report.author.id != current_user.id
-      flash[:alert] = t('controllers.common.alert_edit_authorization_error', name: Report.model_name.human)
-      redirect_to report_path(@report)
-    end
+    return @report if @report.author.id == current_user.id
+
+    flash[:alert] = t('controllers.common.alert_edit_authorization_error', name: Report.model_name.human)
+    redirect_to report_path(@report)
   end
 
   def create
@@ -25,7 +27,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to reports_path }
+        format.html { redirect_to reports_path, notice: t('controllers.common.notice_create', name: Report.model_name.human) }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -52,11 +54,11 @@ class ReportsController < ApplicationController
       @report.destroy
 
       respond_to do |format|
-        format.html { redirect_to reports_url notice: :report_is_deleted }
+        format.html { redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human) }
         format.json { head :no_content }
       end
     end
- end
+  end
 
   private
 
