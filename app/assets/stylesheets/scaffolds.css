@@ -325,3 +325,21 @@ form input[type="submit"]:hover {
   margin-top: 24px;
   max-width: var(--single-column-w);
 }
+
+.comment-content {
+  display:flex;
+  justify-content:space-between;
+}
+
+.comment-content .content-div {
+  flex: 3;
+  margin-right: 10px;
+}
+
+.comment-content .button-div {
+  flex: 1;
+}
+
+.margin-b-20 {
+  margin-bottom: 20px;
+}

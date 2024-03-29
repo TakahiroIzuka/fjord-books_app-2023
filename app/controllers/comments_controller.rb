@@ -10,6 +10,10 @@ class CommentsController < ApplicationController
     reise NotImplementedError
   end
 
+  def destroy
+    reise NotImplementedError
+  end
+
   private
 
   def comment_params

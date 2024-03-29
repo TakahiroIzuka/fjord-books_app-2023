@@ -12,6 +12,16 @@ class Books::CommentsController < CommentsController
     end
   end
 
+  def destroy
+    @book = Book.find(params[:book_id])
+    @comment = @book.comments.find(params[:id])
+    if @comment.user_id != current_user.id
+      redirect_to book_path(@book), alert: '他のユーザーのコメントは削除できません'
+    end
+
+    @comment.destroy
+    redirect_to book_path(@book), notice: 'コメントを削除しました'
+  end
 
   private
 
