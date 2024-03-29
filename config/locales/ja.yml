@@ -223,3 +223,6 @@ ja:
   report:
     new:
       title: "日報作成"
+  comment:
+    _comment:
+      deleted_user: "退会済みのユーザー"

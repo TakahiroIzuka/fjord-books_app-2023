@@ -18,12 +18,16 @@
 
   <p>
     <strong><%= Comment.human_attribute_name(:user) %>:</strong>
-    <span><%= comment.user.display_name %></span>
+    <% if comment&.user.present? %>
+      <span><%= comment.user.display_name %></span>
+    <% else %>
+      <span><%= t('comment._comment.deleted_user') %></span>
+    <% end %>
   </p>
 
   <p>
     <strong><%= Comment.human_attribute_name(:created_at) %>:</strong>
-    <span><%= comment.get_posted_date %></span>
+    <span><%= comment.posted_date %></span>
   </p>
 
 </div>
