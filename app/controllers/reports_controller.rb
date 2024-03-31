@@ -26,8 +26,8 @@ class ReportsController < ApplicationController
       end
 
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    rescue => e
-      flash.now[:alert] = e.message
+    rescue
+      flash.now[:alert] = t('errors.create_error_occurred')
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,9 +37,8 @@ class ReportsController < ApplicationController
       @report.update(update_params)
 
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    rescue => e
-      p e.message
-      flash.now[:alert] = e.message
+    rescue
+      flash.now[:alert] = t('errors.update_error_occurred')
       render :edit, status: :unprocessable_entity
     end
   end

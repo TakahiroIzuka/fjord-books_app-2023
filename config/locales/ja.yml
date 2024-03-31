@@ -84,6 +84,8 @@ ja:
       year: 年
   errors:
     format: "%{attribute}%{message}"
+    create_error_occurred: 新規作成に失敗しました。入力値を確認してください。
+    update_error_occurred: 更新に失敗しました。入力値を確認してください。
     messages:
       accepted: を受諾してください
       blank: を入力してください
