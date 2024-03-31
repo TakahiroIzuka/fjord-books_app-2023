@@ -19,11 +19,16 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    @report = current_user.reports.new(report_params)
+    begin
+      ActiveRecord::Base.transaction do
+        @report = current_user.reports.create!(report_params)
+        @report.mention_reports!(mentioning_reports)
+      end
 
-    if @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
+    rescue => e
+      p e.message
+      flash.now[:alert] = t('controllers.common.alert_create', name: Report.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -50,5 +55,10 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
+  end
+
+  def mentioning_reports
+    url_arrays = report_params[:content].scan(/(http:\/\/localhost:3000\/reports)\/([0-9]+)/)
+    url_arrays.filter_map { |url_array| url_array[1].to_i }
   end
 end
