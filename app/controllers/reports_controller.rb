@@ -19,14 +19,12 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    begin
-      ActiveRecord::Base.transaction do
-        @report = current_user.reports.create!(create_params)
-        @report.mention_reports!(mentioning_reports)
-      end
+    ActiveRecord::Base.transaction do
+      @report = current_user.reports.create!(create_params)
+      @report.mention_reports!(mentioning_reports)
 
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    rescue
+    rescue StandardError
       flash.now[:alert] = t('errors.create_error_occurred')
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +35,7 @@ class ReportsController < ApplicationController
       @report.update(update_params)
 
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    rescue
+    rescue StandardError
       flash.now[:alert] = t('errors.update_error_occurred')
       render :edit, status: :unprocessable_entity
     end
@@ -64,7 +62,7 @@ class ReportsController < ApplicationController
   end
 
   def mentioning_reports
-    url_arrays = create_params[:content].scan(/(http:\/\/localhost:3000\/reports)\/([0-9]+)/)
+    url_arrays = create_params[:content].scan(%r{(http://localhost:3000/reports)/([0-9]+)})
     url_arrays.filter_map { |url_array| url_array[1].to_i }
   end
 end

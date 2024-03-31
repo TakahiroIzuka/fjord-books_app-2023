@@ -6,14 +6,15 @@ class Report < ApplicationRecord
 
   has_many :active_report_relationships,
            class_name: 'ReportRelationship',
-           foreign_key: 'report_id',
-           dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :report
   has_many :mentioning_reports, through: :active_report_relationships, source: :mentioning_report
 
   has_many :passive_report_relationships,
            class_name: 'ReportRelationship',
            foreign_key: 'mentioning_report_id',
-           dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :mentioning_report
   has_many :mentioned_reports, through: :passive_report_relationships, source: :report
 
   validates :title, presence: true
