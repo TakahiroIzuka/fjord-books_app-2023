@@ -21,22 +21,25 @@ class ReportsController < ApplicationController
   def create
     begin
       ActiveRecord::Base.transaction do
-        @report = current_user.reports.create!(report_params)
+        @report = current_user.reports.create!(create_params)
         @report.mention_reports!(mentioning_reports)
       end
 
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     rescue => e
-      p e.message
-      flash.now[:alert] = t('controllers.common.alert_create', name: Report.model_name.human)
+      flash.now[:alert] = e.message
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @report.update(report_params)
+    ActiveRecord::Base.transaction do
+      @report.update(update_params)
+
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
+    rescue => e
+      p e.message
+      flash.now[:alert] = e.message
       render :edit, status: :unprocessable_entity
     end
   end
@@ -53,12 +56,16 @@ class ReportsController < ApplicationController
     @report = current_user.reports.find(params[:id])
   end
 
-  def report_params
+  def create_params
     params.require(:report).permit(:title, :content)
   end
 
+  def update_params
+    params.require(:report).permit(:title, :content).merge(mentioning_report_ids: mentioning_reports)
+  end
+
   def mentioning_reports
-    url_arrays = report_params[:content].scan(/(http:\/\/localhost:3000\/reports)\/([0-9]+)/)
+    url_arrays = create_params[:content].scan(/(http:\/\/localhost:3000\/reports)\/([0-9]+)/)
     url_arrays.filter_map { |url_array| url_array[1].to_i }
   end
 end
