@@ -6,11 +6,23 @@ class CommentsController < ApplicationController
   end
 
   def create
-    reise NotImplementedError
+    @comment = @commentable.comments.new(comment_params)
+    if @comment.save
+      redirect_to @comment.commentable, notice: 'コメントを投稿しました'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    reise NotImplementedError
+    @comment = @commentable.comments.find(params[:id])
+    if @comment.user_id != current_user.id
+      redirect_to @commentable, alert: '他のユーザーのコメントは削除できません'
+    elsif @comment.destroy
+      redirect_to @commentable, notice: 'コメントを削除しました'
+    else
+      render :destroy, status: :unprocessable_entity
+    end
   end
 
   private
