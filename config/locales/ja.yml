@@ -213,6 +213,7 @@ ja:
       alert_update: "%{name}の更新に失敗しました。"
       alert_destroy: "%{name}の削除に失敗しました。"
       alert_edit_authorization_error: "この%{name}の編集権限がありません"
+      alert_update_authorization_error: "この%{name}の更新権限がありません"
       alert_destroy_authorization_error: "この%{name}の削除権限がありません"
   layouts:
     application:

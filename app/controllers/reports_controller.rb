@@ -15,11 +15,9 @@ class ReportsController < ApplicationController
 
   def edit
     @report = Report.find(params[:id])
+    return unless created_by_current_user?(:edit)
 
-    return @report if @report.author.id == current_user.id
-
-    flash[:alert] = t('controllers.common.alert_edit_authorization_error', name: Report.model_name.human)
-    redirect_to report_path(@report)
+    @report
   end
 
   def create
@@ -35,8 +33,9 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+    return unless created_by_current_user?(:update)
 
-    if @report.update(report_params)
+    if @report.update!(report_params)
       redirect_to report_path(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       flash[:alert] = t('controllers.common.alert_update', name: Report.model_name.human)
@@ -46,11 +45,9 @@ class ReportsController < ApplicationController
 
   def destroy
     @report = Report.find(params[:id])
+    return unless created_by_current_user?(:destroy)
 
-    if @report.author.id != current_user.id
-      flash[:alert] = t('controllers.common.alert_destroy_authorization_error', name: Report.model_name.human)
-      redirect_to report_path(@report)
-    elsif @report.destroy
+    if @report.destroy
       redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     else
       flash[:alert] = t('controllers.common.alert_destroy', name: Report.model_name.human)
@@ -59,6 +56,14 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def created_by_current_user?(witch_action)
+    return true if @report.author.id == current_user.id
+
+    flash[:alert] = t("controllers.common.alert_#{witch_action}_authorization_error", name: Report.model_name.human)
+    redirect_to report_path(@report)
+    false
+  end
 
   def report_params
     params.require(:report).permit(:title, :description)
