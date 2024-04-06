@@ -25,14 +25,11 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to book_url(@book), notice: t('controllers.common.notice_create', name: Book.model_name.human) }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.save
+      redirect_to book_path(@book), notice: t('controllers.common.notice_create', name: Book.model_name.human)
+    else
+      flash[:alert] = t('controllers.common.alert_create', name: Book.model_name.human)
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -40,25 +37,22 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
 
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: t('controllers.common.notice_update', name: Book.model_name.human) }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.update(book_params)
+      redirect_to book_path(@book), notice: t('controllers.common.notice_update', name: Book.model_name.human)
+    else
+      flash[:alert] = t('controllers.common.alert_update', name: Book.model_name.human)
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /books/1 or /books/1.json
   def destroy
     book = Book.find(params[:id])
-    book.destroy
-
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: t('controllers.common.notice_destroy', name: Book.model_name.human) }
-      format.json { head :no_content }
+    if book.destroy
+      redirect_to books_path, notice: t('controllers.common.notice_destroy', name: Book.model_name.human)
+    else
+      flash[:alert] = t('controllers.common.alert_destroy', name: Book.model_name.human)
+      render :destroy, status: :unprocessable_entity
     end
   end
 

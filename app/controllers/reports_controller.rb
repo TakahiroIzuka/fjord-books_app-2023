@@ -25,26 +25,22 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params.merge({ user_id: current_user.id }))
 
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to reports_path, notice: t('controllers.common.notice_create', name: Report.model_name.human) }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @report.save
+      redirect_to report_path(@report), notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    else
+      flash[:alert] = t('controllers.common.alert_create', name: Report.model_name.human)
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @report = Report.find(params[:id])
 
-    respond_to do |format|
-      if @report.update(report_params)
-        format.html { redirect_to report_url(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human) }
-        format.json { render :show, status: :ok, location: @report }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.update(report_params)
+      redirect_to report_path(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human)
+    else
+      flash[:alert] = t('controllers.common.alert_update', name: Report.model_name.human)
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -54,13 +50,11 @@ class ReportsController < ApplicationController
     if @report.author.id != current_user.id
       flash[:alert] = t('controllers.common.alert_destroy_authorization_error', name: Report.model_name.human)
       redirect_to report_path(@report)
+    elsif @report.destroy
+      redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     else
-      @report.destroy
-
-      respond_to do |format|
-        format.html { redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human) }
-        format.json { head :no_content }
-      end
+      flash[:alert] = t('controllers.common.alert_destroy', name: Report.model_name.human)
+      render :destroy, status: :unprocessable_entity
     end
   end
 
