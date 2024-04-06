@@ -34,6 +34,11 @@ class Report < ApplicationRecord
     end
   end
 
+  def self.mentioning_report_ids(content)
+    report_ids = content.scan(%r{(http://localhost:3000/reports)/([0-9]+)})
+    report_ids.filter_map { |url_array| url_array[1].to_i }.uniq
+  end
+
   private
 
   def mention(other_report_id)
