@@ -19,13 +19,11 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    ActiveRecord::Base.transaction do
-      @report = current_user.reports.create!(create_params)
-      @report.mention_reports!(mentioning_reports)
 
+    @report = current_user.reports.create(create_params)
+    if @report.mention_reports(mentioning_reports) && @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    rescue StandardError
-      flash.now[:alert] = t('errors.create_error_occurred')
+    else
       render :new, status: :unprocessable_entity
     end
   end

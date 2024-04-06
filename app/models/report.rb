@@ -28,15 +28,15 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def mention_reports!(report_ids)
+  def mention_reports(report_ids)
     report_ids.each do |report_id|
-      mention!(report_id)
+      mention(report_id)
     end
   end
 
   private
 
-  def mention!(other_report_id)
-    active_report_relationships.create!(mentioning_report_id: other_report_id)
+  def mention(other_report_id)
+    active_report_relationships.create(mentioning_report_id: other_report_id)
   end
 end
