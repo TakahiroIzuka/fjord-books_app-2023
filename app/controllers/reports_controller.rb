@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.create(create_params)
 
-    if @report.mention_reports(Report.mentioning_report_ids(create_params[:content])) && @report.save
+    if @report.mention_reports(@report.mentioning_report_ids(create_params[:content])) && @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -52,6 +52,6 @@ class ReportsController < ApplicationController
   end
 
   def update_params
-    params.require(:report).permit(:title, :content).merge(mentioning_report_ids: Report.mentioning_report_ids(create_params[:content]))
+    params.require(:report).permit(:title, :content).merge(mentioning_report_ids: @report.mentioning_report_ids(create_params[:content]))
   end
 end
