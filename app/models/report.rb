@@ -30,6 +30,8 @@ class Report < ApplicationRecord
 
   def mention_reports(report_ids)
     report_ids.each do |report_id|
+      next unless Report.exists?(report_id)
+
       mention(report_id)
     end
   end
