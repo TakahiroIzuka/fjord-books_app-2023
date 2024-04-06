@@ -1,10 +1,10 @@
 <div class="mentions-container">
-  <strong>この記事は以下の記事からメンションされています</strong>
+  <strong><%= t('views.common.mentioning') %></strong>
   <ul>
     <% report.mentioned_reports.each do |report| %>
       <li>
-        日報: <a href="<%= report_path(report) %>"><%= report.title %></a>
-        投稿者: <a href="<%= user_path(report.user) %>"><%= report.user.name_or_email %></a>
+        <%= Report.model_name.human %>: <a href="<%= report_path(report) %>"><%= report.title %></a>
+        <%= Report.human_attribute_name(:user) %>: <a href="<%= user_path(report.user) %>"><%= report.user.name_or_email %></a>
       </li>
     <% end %>
   </ul>
