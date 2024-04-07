@@ -11,6 +11,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @current_user = current_user
   end
 
   def edit
@@ -58,7 +59,7 @@ class ReportsController < ApplicationController
   private
 
   def created_by_current_user?(witch_action)
-    return true if @report.author.id == current_user.id
+    return true if @report.created_by?(current_user)
 
     flash[:alert] = t("controllers.common.alert_#{witch_action}_authorization_error", name: Report.model_name.human)
     redirect_to report_path(@report)
