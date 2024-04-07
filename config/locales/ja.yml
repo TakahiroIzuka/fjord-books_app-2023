@@ -192,10 +192,12 @@ ja:
       title_index: "%{name}の一覧"
       title_new: "%{name}の新規作成"
       title_edit: "%{name}の編集"
+      new_something_to_target: "この%{target}に%{name}を追加する"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
       title_show: "%{name}の詳細"
       sign_out: ログアウト
+      just_back: 戻る
     pagination:
       first: '« 最初'
       last: '最後 »'
@@ -207,6 +209,12 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      alert_create: "%{name}の作成に失敗しました。"
+      alert_update: "%{name}の更新に失敗しました。"
+      alert_destroy: "%{name}の削除に失敗しました。"
+      alert_edit_authorization_error: "この%{name}の編集権限がありません"
+      alert_update_authorization_error: "この%{name}の更新権限がありません"
+      alert_destroy_authorization_error: "この%{name}の削除権限がありません"
   layouts:
     application:
       menu: メニュー
@@ -216,3 +224,9 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  report:
+    new:
+      title: "日報作成"
+  comment:
+    _comment:
+      deleted_user: "退会済みのユーザー"
