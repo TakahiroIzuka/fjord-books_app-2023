@@ -19,9 +19,9 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.create(create_params)
+    @report = current_user.reports.new(report_params)
 
-    if @report.mention_reports(@report.mentioning_report_ids(create_params[:content])) && @report.save
+    if @report.save!
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -31,9 +31,11 @@ class ReportsController < ApplicationController
   def update
     @report = current_user.reports.find(params[:id])
 
-    if @report.update(update_params)
+    begin
+      @report.update!(report_params)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = t('controllers.common.not_found_error', name: Report.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,11 +49,11 @@ class ReportsController < ApplicationController
 
   private
 
-  def create_params
-    params.require(:report).permit(:title, :content)
+  def report_params
+    required_params.merge(mentioning_report_ids: Report.mentioning_report_ids(required_params[:content]))
   end
 
-  def update_params
-    params.require(:report).permit(:title, :content).merge(mentioning_report_ids: @report.mentioning_report_ids(create_params[:content]))
+  def required_params
+    params.require(:report).permit(:title, :content)
   end
 end
