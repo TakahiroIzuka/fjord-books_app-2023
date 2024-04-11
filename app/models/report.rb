@@ -20,6 +20,8 @@ class Report < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
+  before_save :set_mentioning_report_ids
+
   def editable?(target_user)
     user == target_user
   end
@@ -28,7 +30,13 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def self.mentioning_report_ids(content)
+  def set_mentioning_report_ids
+    self.mentioning_report_ids = mentioned_report_ids(content)
+  end
+
+  private
+
+  def mentioned_report_ids(content)
     report_ids = content.scan(%r{(http://localhost:3000/reports)/([0-9]+)})
     report_ids.filter_map { |url_array| url_array[1].to_i }.uniq
   end
