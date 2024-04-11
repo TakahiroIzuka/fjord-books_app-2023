@@ -30,11 +30,11 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
+  private
+
   def set_mentioning_report_ids
     self.mentioning_report_ids = mentioned_report_ids(content)
   end
-
-  private
 
   def mentioned_report_ids(content)
     report_ids = content.scan(%r{(http://localhost:3000/reports)/([0-9]+)})
