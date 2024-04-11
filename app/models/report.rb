@@ -38,6 +38,7 @@ class Report < ApplicationRecord
 
   def mentioned_report_ids(content)
     report_ids = content.scan(%r{(http://localhost:3000/reports)/([0-9]+)})
-    report_ids.filter_map { |url_array| url_array[1].to_i }.uniq
+    report_ids = report_ids.filter_map { |url_array| url_array[1].to_i }.uniq
+    Report.where(id: report_ids).where.not(id:).pluck(:id)
   end
 end
