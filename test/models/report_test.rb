@@ -26,5 +26,8 @@ class ReportTest < ActiveSupport::TestCase
 
     third_report = Report.create!(user:, title: 'Title', content: "http://localhost:3000/reports/#{first_report.id}")
     assert_equal [first_report], third_report.mentioning_reports
+
+    third_report.update!(content: 'deleted mention')
+    assert_equal [], third_report.mentioning_reports
   end
 end

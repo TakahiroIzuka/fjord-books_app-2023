@@ -30,6 +30,6 @@ class Report < ApplicationRecord
     active_mentions.destroy_all
     ids = content.to_s.scan(MENTION_REGEXP).flatten.uniq
     reports = Report.where(id: ids).where.not(id:)
-    self.mentioning_reports += reports
+    self.mentioning_reports = reports
   end
 end
