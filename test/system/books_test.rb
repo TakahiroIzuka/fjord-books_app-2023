@@ -47,5 +47,6 @@ class BooksTest < ApplicationSystemTestCase
     click_on 'この本を削除'
 
     assert_text '本が削除されました。'
+    assert_no_text @book.title
   end
 end
