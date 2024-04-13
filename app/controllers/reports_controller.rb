@@ -34,7 +34,6 @@ class ReportsController < ApplicationController
     if @report.update(report_params)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
-      flash[:alert] = t('controllers.common.not_found_error', name: Report.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end
