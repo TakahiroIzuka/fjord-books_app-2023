@@ -84,6 +84,7 @@ ja:
       year: 年
   errors:
     format: "%{attribute}%{message}"
+    update_error_occurred: 更新に失敗しました。入力値を確認してください。
     messages:
       accepted: を受諾してください
       blank: を入力してください
@@ -196,6 +197,7 @@ ja:
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
       title_show: "%{name}の詳細"
       sign_out: ログアウト
+      mentioning: この日報は以下の日報から言及されています
     pagination:
       first: '« 最初'
       last: '最後 »'
@@ -207,6 +209,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      not_found_error: "言及先のIDが存在しないため、この%{name}は保存できませんでした"
   layouts:
     menu:
       menu: メニュー
