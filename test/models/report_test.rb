@@ -28,6 +28,6 @@ class ReportTest < ActiveSupport::TestCase
     assert_equal [first_report], third_report.mentioning_reports
 
     third_report.update!(content: 'deleted mention')
-    assert_equal [], third_report.mentioning_reports
+    assert_equal [], third_report.reload.mentioning_reports
   end
 end
